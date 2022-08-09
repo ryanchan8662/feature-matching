@@ -2,8 +2,7 @@
 
 ## Overview
 
-Provides a general feature recognition library based on a simple convolutional filter-based edge finder. Built for use in embedded devices such as computer vision modules or robotic applications,
-but with the option to deploy within a traditional OS environment.
+Provides a general feature recognition library based on a simple convolutional filter-based edge finder. Built for use in embedded devices such as computer vision modules or robotic applications, where the use of libraries and/or dedicated processing accelerators are restricted or unfeasible.
 
 ### TODO:
 - Apply Sobol operator to isolate edges and gradients within RGB image
