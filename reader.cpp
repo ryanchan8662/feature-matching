@@ -52,7 +52,7 @@ struct HeadlessBitmap* read_file() {
 
 
     // calculate size of pixel data
-    return_value->data = (uint8_t*)malloc(sizeof(uint8_t) * return_value->x * return_value->y * 3);
+    return_value->data = (uint8_t*) malloc(sizeof(uint8_t) * return_value->x * return_value->y * 3);
     if (return_value->data == nullptr) return (nullptr);
 
     // get pixel data
@@ -60,5 +60,6 @@ struct HeadlessBitmap* read_file() {
     fread(return_value->data, sizeof(uint8_t), return_value->x * return_value->y * 3, file_pointer);
 
     printf("Total size: %d, header size: %d, X: %d, Y: %d\n", *file_size, *header_size, return_value->x, return_value->y);
+    return_value->pixel_width = 3;
     return (return_value);
 }
