@@ -5,7 +5,7 @@
 Provides a general feature recognition library based on a simple convolutional filter-based edge finder. Built for use in embedded devices such as computer vision modules or robotic applications, where the use of libraries and/or dedicated processing accelerators are restricted or unfeasible.
 
 ### TODO:
-- Apply Sobol operator to isolate edges and gradients within RGB image
+- Apply Sobel operator to isolate edges and gradients within RGB image
 - Implement a Harris Corner Detection algorithm to detect features based on edge direction
 - Recognise common features or elements between two stereoscopic perspectives with a weighted property system
 - Derive a 3D representation of an environment given 2 stereoscopic feature-rich input maps
