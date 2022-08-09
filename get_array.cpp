@@ -14,9 +14,18 @@
 
 uint8_t* to_pointer(uint8_t* input_array, uint32_t x, uint32_t y, uint32_t size_x, uint32_t size_y, uint32_t segment_size) {
 
-	if (x >= size_x || y >= size_y) return (nullptr); // check for invalid requests
+	if (x >= size_x || y >= size_y || x < 0 || y < 0) return (nullptr); // check for invalid requests
 
 
-	return (input_array + ((y * size_x) + x)  * segment_size + 2 * y);
+	//return (input_array + ((y * size_x) + x)  * segment_size + 2 * y);
+
+
+	// get unpadded row width, add extra double word, trim overflow
+	uint32_t row_width = (size_x * segment_size + 4) & ~0x3;
+
+	return (input_array + (y * row_width + x * segment_size));
+
+
+	//return (input_array + );
 
 }

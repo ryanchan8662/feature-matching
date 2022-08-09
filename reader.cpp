@@ -49,10 +49,12 @@ struct HeadlessBitmap* read_file() {
     fseek(file_pointer, 0x16, SEEK_SET);
     fread(&(return_value->y), 4, 1, file_pointer);
 
+    // since BMP formats pad each row to 4 bytes, allocate space aligned to 4 bytes
+    // to get end of current row, align pointer to double words
 
 
-    // calculate size of pixel data
-    return_value->data = (uint8_t*) malloc(sizeof(uint8_t) * return_value->x * return_value->y * 3);
+    // calculate size of pixel data, align to 4 bytes
+    return_value->data = (uint8_t*) ((uintptr_t)malloc(sizeof(uint8_t) * return_value->x * return_value->y * 3 + 3) & ~(uintptr_t)0x3);
     if (return_value->data == nullptr) return (nullptr);
 
     // get pixel data
