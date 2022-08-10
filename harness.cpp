@@ -1,6 +1,7 @@
 #include "reader.h" // for testing purposes, turns file input into contiguous memory space
 #include "writer.h"
 #include "get_array.h" // simplified XY->N converter
+#include "filters.h"
 #include <iostream>
 #include <time.h>
 
@@ -16,5 +17,7 @@ int main(int argc, char** argv) {
     }
 
     point(image, 0xFF00FF, 256, 256, 16);
+    Filters::gaussian(image, 2);
+    
     write_bmp(image);
 }
