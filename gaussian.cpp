@@ -67,8 +67,7 @@ struct HeadlessBitmap* Filters::gaussian (struct HeadlessBitmap* _Data, float _S
 
 		}
 	}
-	//printf("Return ~ X: %u to X: %u\n", _Data->x, horizontal.x);
-	// temporary result
+
 	printf("End blur sequence\n");
 
 	return (horizontal);
