@@ -17,54 +17,57 @@ struct HeadlessBitmap* Filters::gaussian (struct HeadlessBitmap* _Data, float _S
 	// generate range of integer sample points
 	int32_t range = (uint32_t)(2.718f * _Sigma + 1);
 	int32_t kernel_size = range * 2 + 1;
-
-		// generate gaussian distribution for image
+	
+		// generate gaussian kernel for image
 		// https://en.wikipedia.org/wiki/Gaussian_blur
-	for (int32_t i = -range, counter = 0; i <= range; i++) {
+	for (int32_t i = -range, counter = 0; i <= range; i++) 
 		gaussian_kernel[counter++] = 1 / (sqrt(2 * 3.141f * pow(_Sigma, 2)) * pow(2.718f, (pow(i, 2) / (2 * pow(_Sigma, 2)))));
-	}
-	// inverted as pow cannot work with negative exponents
 
-	printf("Kernel range: %d and size: %d\n", range, (range * 2 + 1));
-
+	// work stuff to do:
+	// actual pokemon robot documentation
 
 	// horizontal pass ~~~~~~~~~~~~~~~~~~~~~~
 
 	// create intermediate file structure
 	struct HeadlessBitmap* horizontal = (struct HeadlessBitmap*)malloc(sizeof(struct HeadlessBitmap));
-	horizontal->x = _Data->x - ((uint32_t) range * 2); // pixels are removed from the left/right edges by the filter
+	if (horizontal == nullptr) return (nullptr);
+
+	horizontal->x = _Data->x - (uint32_t) range * 2; // pixels are removed from the left/right edges by the filter
+	// MAY BE A SITE OF FUTURE BUGS, REVISE LATER - SHOULD BE "(uint32_t) range * 2" ~~~~~~~~~~~~~~~~~~~
 	horizontal->y = _Data->y; // no changes vertically
 	horizontal->pixel_width = _Data->pixel_width;
 
-	// allocate padded space for data
-	uint32_t row_width = (horizontal->x * horizontal->pixel_width + 4) & ~0x3;
-	horizontal->data = (uint8_t*)malloc(row_width * horizontal->y);
+	// allocate padded and aligned space for data
+	// row width * number of rows
+	horizontal->data = (uint8_t*)((uintptr_t)malloc((horizontal->x * horizontal->pixel_width + 4) * horizontal->y) & ~(uintptr_t)0x3);
 
-	//printf("X: %u to X: %u\n", _Data->x, horizontal.x);
-	//printf("For filter, allocated %u's worth of space\n", row_width * horizontal.y);
+	printf("Kernel size: %d, range: %d\n", kernel_size, range);
+	printf("Before: %u x %u\n", _Data->x, _Data->y);
+	printf("After: %u x %u\n", horizontal->x, horizontal->y);
 
 	printf("Start blur sequence\n");
-	// for each pixel
-	for (uint32_t x = (uint32_t)range - 1; x < horizontal->x; x++) {
+	// for each pixel, bounds of new image
+	for (uint32_t x = 0; x < horizontal->x; x++) {
 		for (uint32_t y = 0; y < horizontal->y; y++) {
-			
+
 			// get pointer to first channel of pixel
-			uint8_t* new_ptr = to_pointer(horizontal->data, x - range + 1, y, horizontal->x, horizontal->y, horizontal->pixel_width);
-			uint8_t* old_ptr = to_pointer(_Data->data, x, y, _Data->x, _Data->y, _Data->pixel_width);
+			// offset new_ptr x by size of filter
+			uint8_t* new_ptr = to_pointer(horizontal->data, x, y, horizontal->x, horizontal->y, horizontal->pixel_width);
+			uint8_t* old_ptr = to_pointer(_Data->data, x + (uint32_t)range, y, _Data->x, _Data->y, _Data->pixel_width);
 
 			// and for each pixel's individual channels
-			for (uint8_t z = 0; z < _Data->pixel_width; z++) {
+			for (uint8_t z = 0; z < horizontal->pixel_width; z++) {
 
-				*(new_ptr + z) = 0;
-				
 				// for each neighbour pixel weighted on kernel, add to pixel sum
+				uint32_t temp = 0;
 				for (int32_t a = -range; a <= range; a++) {
 					// *(new_ptr + z) = offset by channel number from pixel address origin = channel of a pixel
 					// *(old_ptr + z + a) = offset by channel, set back/forwards number of pixels shifted
-					*(new_ptr + z) += *(old_ptr + z + (a * _Data->pixel_width)) * gaussian_kernel[a];
+					temp += (*(old_ptr + z + (a * _Data->pixel_width))) * gaussian_kernel[a];
+					//*(new_ptr + z) += (* (old_ptr + z + (a * _Data->pixel_width))) * gaussian_kernel[a];
 				}
+				*(new_ptr + z) = (uint8_t)(temp > 255 ? (0) : temp);
 			}
-
 		}
 	}
 

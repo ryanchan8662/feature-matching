@@ -21,7 +21,7 @@ uint8_t* to_pointer(uint8_t* input_array, uint32_t x, uint32_t y, uint32_t size_
 
 
 	// get unpadded row width, add extra double word, trim overflow
-	uint32_t row_width = (size_x * segment_size + 4) & ~0x3;
+	uint32_t row_width = (size_x * segment_size + 3) & ~0x3;
 
 	return (input_array + (y * row_width + x * segment_size));
 

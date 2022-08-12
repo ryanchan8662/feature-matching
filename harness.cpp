@@ -17,9 +17,7 @@ int main(int argc, char** argv) {
     }
 
     //point(image, 0xFF00FF, 256, 256, 16);
-    printf("Before filter: %u, %u\n", image->x, image->y);
-    image = Filters::gaussian(image, 10);
-    printf("After filter: %u, %u\n", image->x, image->y);
+    image = Filters::gaussian(image, 32);
     
     write_bmp(image);
 }
