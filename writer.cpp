@@ -54,9 +54,12 @@ uint8_t write_bmp (struct HeadlessBitmap* _Data) {
     buffer_32 = 0x0; // important colours
     fwrite(&buffer_32, sizeof(buffer_32), 1, file_pointer);
 
-    // write image data
-    fwrite(_Data->data, ((_Data->x * _Data->pixel_width + 4) & ~0x3) * _Data->y, 1, file_pointer);
+    for (uint32_t i = 0; i < _Data->y; i++) {
+        fwrite(_Data->data[i], (_Data->x * _Data->pixel_width + 3) & ~0x3, 1, file_pointer);
+    }
+
     fclose(file_pointer);
+    // write image data
 
     //printf("Successfully written.\n");
     

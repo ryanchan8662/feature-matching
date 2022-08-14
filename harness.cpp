@@ -16,8 +16,8 @@ int main(int argc, char** argv) {
         return (1);
     }
 
-    //point(image, 0xFF00FF, 256, 256, 16);
-    image = Filters::gaussian(image, 32);
+    point(image, 0xFF00FF, 256, 256, 16);
+    image = Filters::gaussian(image, 10);
     
     write_bmp(image);
 }

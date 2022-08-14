@@ -22,7 +22,7 @@ struct HeadlessBitmap* read_file() {
 
     errno_t err;
     FILE* file_pointer;
-    err = fopen_s(&file_pointer, "./test-images/test1.bmp", "rb");
+    err = fopen_s(&file_pointer, "./test-images/test0.bmp", "rb");
     if (file_pointer == nullptr) return (nullptr);
     
 
@@ -49,19 +49,30 @@ struct HeadlessBitmap* read_file() {
     fseek(file_pointer, 0x16, SEEK_SET);
     fread(&(return_value->y), 4, 1, file_pointer);
 
+    return_value->pixel_width = 3;
+
     // since BMP formats pad each row to 4 bytes, allocate space aligned to 4 bytes
     // to get end of current row, align pointer to double words
 
 
-    // calculate size of pixel data, align to 4 bytes
-    return_value->data = (uint8_t*) ((uintptr_t)malloc(sizeof(uint8_t) * return_value->x * return_value->y * 3 + 3) & ~(uintptr_t)0x3);
+    // initialise double pointer to store individual rows 
+    return_value->data = (uint8_t**)malloc(sizeof(uint8_t*) * return_value->y);
     if (return_value->data == nullptr) return (nullptr);
 
+    for (uint32_t i = 0; i < return_value->y; i++) {
+        // create padded and aligned pointer
+        return_value->data[i] = (uint8_t*)((uintptr_t)malloc(sizeof(uint8_t) * return_value->x * return_value->pixel_width + 3) & ~(uintptr_t)0x3);
+        fseek(file_pointer, *header_size + ((((return_value->x * return_value->pixel_width + 3) & ~0x3) * i)), SEEK_SET);
+        fread(return_value->data[i], (return_value->x * return_value->pixel_width + 3) & ~0x3, 1, file_pointer);
+    }
+
+    fclose(file_pointer);
+
+    printf("Read %u lines\n", return_value->y);
+
     // get pixel data
-    fseek(file_pointer, *header_size, SEEK_SET);
-    fread(return_value->data, sizeof(uint8_t), return_value->x * return_value->y * 3, file_pointer);
 
     printf("Total size: %d, header size: %d, X: %d, Y: %d\n", *file_size, *header_size, return_value->x, return_value->y);
-    return_value->pixel_width = 3;
+    
     return (return_value);
 }

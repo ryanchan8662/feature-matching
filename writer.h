@@ -21,5 +21,5 @@
 #ifndef FILE_WRITER
 #define FILE_WRITER
 uint8_t write_bmp(struct HeadlessBitmap* _Data);
-uint8_t point(struct HeadlessBitmap* _Data, uint32_t _Rgb, uint32_t _LocationX, uint32_t _LocationY, uint16_t _PointSize);
+void point(struct HeadlessBitmap* _Data, uint32_t _Rgb, uint32_t _LocationX, uint32_t _LocationY, uint16_t _PointSize);
 #endif
