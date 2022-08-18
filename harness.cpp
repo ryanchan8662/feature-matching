@@ -16,12 +16,18 @@ int main(int argc, char** argv) {
         return (1);
     }
 
-    point(image, 0xFF0000, 16, 16, 32);
-    point(image, 0x00FF00, 16 + 32, 16, 32);
-    point(image, 0x0000FF, 16 + 64, 16, 32);
-    point(image, 0xFFFFFF, 16 + 96, 16, 32);
+    //point(image, 0xFF0000, 16, 16, 32);
+    //point(image, 0x00FF00, 16 + 32, 16, 32);
+    //point(image, 0x0000FF, 16 + 64, 16, 32);
+    //point(image, 0xFFFFFF, 16 + 96, 16, 32);
 
-    Filters::gaussian(image, 15);
+    Filters::gaussian(image, 1.5f);
+
+    //point(image, 0xFFFFFF, 16 + 96, 16, 1);
+
+    uint32_t coordinates[] = { -3, -3, -3, -2, -1, 0, 1, 2, 3, 3, 3, 2, 1, 0, -1, -2 };
+
+    uint8_t temp = Filters::fast(image, 512, 512, coordinates);
     
     write_bmp(image);
 }

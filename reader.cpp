@@ -22,7 +22,7 @@ struct HeadlessBitmap* read_file() {
 
     errno_t err;
     FILE* file_pointer;
-    err = fopen_s(&file_pointer, "./test-images/test3.bmp", "rb");
+    err = fopen_s(&file_pointer, "./test-images/test0.bmp", "rb");
     if (file_pointer == nullptr) return (nullptr);
     
 
