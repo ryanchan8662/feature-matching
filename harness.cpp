@@ -21,13 +21,32 @@ int main(int argc, char** argv) {
     //point(image, 0x0000FF, 16 + 64, 16, 32);
     //point(image, 0xFFFFFF, 16 + 96, 16, 32);
 
-    Filters::gaussian(image, 1.5f);
+    Filters::gaussian(image, 2.0f);
 
-    //point(image, 0xFFFFFF, 16 + 96, 16, 1);
+    int32_t coordinates[] = { -3, -3, -3, -2, -1, 0, 1, 2, 3, 3, 3, 2, 1, 0, -1, -2 };
 
-    uint32_t coordinates[] = { -3, -3, -3, -2, -1, 0, 1, 2, 3, 3, 3, 2, 1, 0, -1, -2 };
+    // psuedo-random dots
+    uint32_t col_val[] = { 0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF, 0xFF00FF, 0x000000, 0xFFFFFF, 0xF0F000, 0xF005F0, 0xA51552};
 
-    uint8_t temp = Filters::fast(image, 512, 512, coordinates);
-    
+    std::cout << "Feature filtering...\n";
+
+    struct HeadlessBitmap* old_image = copy(image);
+
+    int max = 0;
+
+    for (uint32_t y = 0; y < image->y; y++) {
+        for (uint32_t x = 0; x < image->x; x++) {
+            if (Filters::fast(old_image, x, y, coordinates)) {
+                point(image, 0xFF00FF, x, y, 2);
+                if (x > max) max = x;
+            }
+            //point(image, 0xFF00FF, x, y, 2);
+            
+        }
+    }    
+
+    //point(image, 0x00FF00, 1024, 1024, 2);
+
+    printf("X: %u, Y: %u, max: %d\n", image->x, image->y, max);
     write_bmp(image);
 }

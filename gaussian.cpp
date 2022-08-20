@@ -28,7 +28,7 @@ uint8_t Filters::gaussian (struct HeadlessBitmap* _Data, float _Sigma) {
 	}
 
 	
-	// normalise for distribution area of 
+	// normalise for area of statistical distribution
 	float normalise = 1.0f / accumulator;
 	accumulator = 0.0f;
 	for (int32_t i = 0; i < kernel_size; i++) {
