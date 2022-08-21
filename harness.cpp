@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
     //point(image, 0x0000FF, 16 + 64, 16, 32);
     //point(image, 0xFFFFFF, 16 + 96, 16, 32);
 
-    Filters::gaussian(image, 2.0f);
+    //Filters::gaussian(image, 2.0f);
 
     int32_t coordinates[] = { -3, -3, -3, -2, -1, 0, 1, 2, 3, 3, 3, 2, 1, 0, -1, -2 };
 
@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 
     for (uint32_t y = 0; y < image->y; y++) {
         for (uint32_t x = 0; x < image->x; x++) {
-            if (Filters::fast(old_image, x, y, coordinates)) {
+            if (Filters::fast(old_image, x, y, coordinates, 1)) {
                 point(image, 0xFF00FF, x, y, 2);
                 if (x > max) max = x;
             }
