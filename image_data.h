@@ -4,7 +4,8 @@
 
 struct HeadlessBitmap {
 	uint32_t x, y;
-	uint8_t* data;
+	uint8_t** data;
+	uint8_t pixel_width;
 };
 
 #endif
