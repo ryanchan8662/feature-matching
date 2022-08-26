@@ -5,7 +5,7 @@ using namespace Filters;
 
 // _Accuracy: precision of edge detection - 0 = fast FAST, approximation of 270deg corners, some may be missed
 // 1 = slow FAST, exact calculation of corners
-uint8_t Filters::fast (struct HeadlessBitmap* _Data, uint32_t _X, uint32_t _Y, int32_t* _Seed, int8_t _Accuracy) {
+uint8_t Filters::fast (struct Structures::HeadlessBitmap* _Data, uint32_t _X, uint32_t _Y, int32_t* _Seed, int8_t _Accuracy) {
 
 	// moved to externally implemented method reduce number of stack allocations required
 	// must be implemented by source subroutine
@@ -23,7 +23,7 @@ uint8_t Filters::fast (struct HeadlessBitmap* _Data, uint32_t _X, uint32_t _Y, i
 	int32_t p_gs = (p_cl & 0xFF) + ((p_cl & 0xFF00) >> 8) + ((p_cl & 0xFF0000) >> 16);
 
 	// neutral threshold: central pixel intensity / 4 for proportional intensities
-	int32_t n_th = (p_gs >> 1) + 32;
+	int32_t n_th = (p_gs >> 2) +16;
 
 	
 	uint16_t l_flag = 0;

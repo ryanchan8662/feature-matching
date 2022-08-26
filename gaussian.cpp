@@ -4,7 +4,7 @@
 
 using namespace Filters;
 
-uint8_t Filters::gaussian (struct HeadlessBitmap* _Data, float _Sigma) {
+uint8_t Filters::gaussian (struct Structures::HeadlessBitmap* _Data, float _Sigma) {
 
 	// generate convolutional kernel ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -39,7 +39,7 @@ uint8_t Filters::gaussian (struct HeadlessBitmap* _Data, float _Sigma) {
 	// horizontal pass ~~~~~~~~~~~~~~~~~~~~~~
 
 	// create intermediate file structure
-	struct HeadlessBitmap* h_data = (struct HeadlessBitmap*)malloc(sizeof(struct HeadlessBitmap));
+	struct Structures::HeadlessBitmap* h_data = (struct Structures::HeadlessBitmap*)malloc(sizeof(struct Structures::HeadlessBitmap));
 	if (h_data == nullptr) return (1);
 
 	h_data->x = _Data->x - (uint32_t)range * 2; // pixels are removed from the left/right edges by the filter
@@ -90,7 +90,7 @@ uint8_t Filters::gaussian (struct HeadlessBitmap* _Data, float _Sigma) {
 
 	// vertical pass ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	struct HeadlessBitmap* v_data = (struct HeadlessBitmap*)malloc(sizeof(struct HeadlessBitmap));
+	struct Structures::HeadlessBitmap* v_data = (struct Structures::HeadlessBitmap*)malloc(sizeof(struct Structures::HeadlessBitmap));
 	if (v_data == nullptr) return (1);
 
 	v_data->x = h_data->x;

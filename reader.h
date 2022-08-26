@@ -20,14 +20,12 @@
 #include <stdio.h>
 #endif
 
-
-#ifndef FILE_READER
-#define FILE_READER
-struct HeadlessBitmap* read_file();
-#endif
-
-
 #ifndef IMAGE_DATA
 #define IMAGE_DATA
 #include "image_data.h"
+#endif
+
+#ifndef FILE_READER
+#define FILE_READER
+struct Structures::HeadlessBitmap* read_file();
 #endif

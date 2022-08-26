@@ -1,5 +1,6 @@
 #include "reader.h"
 
+
 // reads BMP files ONLY!
 
 uint32_t decode_int(uint8_t* buffer, uint32_t start_point) {
@@ -18,11 +19,11 @@ uint32_t decode_int(uint8_t* buffer, uint32_t start_point) {
     return (return_value);
 }
 
-struct HeadlessBitmap* read_file() {
+struct Structures::HeadlessBitmap* read_file() {
 
     errno_t err;
     FILE* file_pointer;
-    err = fopen_s(&file_pointer, "./test-images/test0.bmp", "rb");
+    err = fopen_s(&file_pointer, "./test-images/test4.bmp", "rb");
     if (file_pointer == nullptr) return (nullptr);
     
 
@@ -39,7 +40,7 @@ struct HeadlessBitmap* read_file() {
     fread(header_size, 4, 1, file_pointer);
 
     // create return value object
-    struct HeadlessBitmap* return_value = (HeadlessBitmap*)malloc(sizeof(HeadlessBitmap));
+    struct Structures::HeadlessBitmap* return_value = (Structures::HeadlessBitmap*)malloc(sizeof(Structures::HeadlessBitmap));
     if (return_value == nullptr) return (nullptr);
 
     // get x, y sizes

@@ -3,7 +3,7 @@
 // https://cse4k12.org/encoding/decoding_bmp.pdf
 // Each row in the Pixel array is padded to a multiple of 4 bytes in size
 
-uint8_t write_bmp (struct HeadlessBitmap* _Data) {
+uint8_t write_bmp (struct Structures::HeadlessBitmap* _Data) {
     
     errno_t err;
     FILE* file_pointer;

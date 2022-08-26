@@ -1,8 +1,8 @@
 #include "writer.h"
 
 
-struct HeadlessBitmap* copy (struct HeadlessBitmap* _Data) {
-	struct HeadlessBitmap* r_val = (struct HeadlessBitmap*)malloc(sizeof(struct HeadlessBitmap));
+struct Structures::HeadlessBitmap* copy (struct Structures::HeadlessBitmap* _Data) {
+	struct Structures::HeadlessBitmap* r_val = (struct Structures::HeadlessBitmap*)malloc(sizeof(struct Structures::HeadlessBitmap));
 	if (r_val == nullptr) return (nullptr);
 
 	r_val->x = _Data->x; r_val->y = _Data->y; r_val->pixel_width = _Data->pixel_width;
@@ -15,7 +15,7 @@ struct HeadlessBitmap* copy (struct HeadlessBitmap* _Data) {
 		if (r_val->data[i] == nullptr) return (nullptr);
 
 		uint32_t counter = 0;
-		for (uint32_t j = 0; j < r_val->x * 3; j++) {
+		for (uint32_t j = 0; j < r_val->x * _Data->pixel_width; j++) {
 			r_val->data[i][j] = _Data->data[i][j];
 		}
 	} return (r_val);
