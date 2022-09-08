@@ -33,12 +33,12 @@ int main(int argc, char** argv) {
 
     std::cout << "Feature filtering...\n";
 
+    // write to image, retain old_image for unmodified data
     struct Structures::HeadlessBitmap* old_image = copy(image);
 
     int max = 0;
 
-    old_image[100];
-
+    // _BlockSize should accomodate the estimated maximum stereoscopic deviation
     Structures::Grid pt_aggregate(old_image, 64);
 
     for (uint32_t y = 0; y < image->y; y++) {
@@ -50,12 +50,14 @@ int main(int argc, char** argv) {
                 point_ptr->x = x; point_ptr->y = y;
                 pt_aggregate.register_point(old_image, point_ptr);
             }
-            //point(image, 0xFF00FF, x, y, 2);
             
         }
-    }    
+    }
 
-    //point(image, 0x00FF00, 1024, 1024, 2);
+    uint32_t* orb_kernel = Filters::gaussian_kernel(8, 16);
+
+    
+
 
     
 

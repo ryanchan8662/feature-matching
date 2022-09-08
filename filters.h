@@ -27,6 +27,10 @@ namespace Filters {
 	
 	uint8_t fast (struct Structures::HeadlessBitmap* _Data, uint32_t _X, uint32_t _Y, int32_t* _Seed, int8_t _Accuracy);
 
+	//uint32_t signature (struct Structures::HeadlessBitmap* _Data, uint32_t _X, uint32_t _Y, uint32_t _Radius, uint32_t** _Points);
+
+	uint32_t* gaussian_kernel (uint32_t _Radius, uint32_t _Resolution);
+
 }
 
 #endif
