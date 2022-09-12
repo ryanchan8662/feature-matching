@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     // image structure can be either sourced from a file for testing or a serial buffer for embedded applications
     struct HeadlessBitmap* image = read_file();
     if (image == nullptr) {
-        std::cout << "File was not found.\n";
+        std::cout << "File was not found." << std::endl;
         return (1);
     }
 
