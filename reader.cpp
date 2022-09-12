@@ -22,7 +22,7 @@ uint32_t decode_int(uint8_t* buffer, uint32_t start_point) {
 struct HeadlessBitmap* read_file() {
 
     FILE* file_pointer;
-    file_pointer = fopen("../test-images/test0.bmp", "rb");
+    file_pointer = fopen("../test-images/test3.bmp", "rb");
     if (file_pointer == nullptr) return (nullptr);
     
 

@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
     for (uint32_t y = 0; y < image->y; y++) {
         for (uint32_t x = 0; x < image->x; x++) {
             if (Filters::fast(old_image, x, y, coordinates, 1)) {
-                point(image, 0xFF00FF, x, y, 2);
+                point(image, 0x00FF00, x, y, 2);
                 if (x > max) max = x;
             }
             //point(image, 0xFF00FF, x, y, 2);
@@ -49,4 +49,6 @@ int main(int argc, char** argv) {
 
     printf("X: %u, Y: %u, max: %d\n", image->x, image->y, max);
     write_bmp(image);
+
+    uint32_t* temp = Filters::gaussian_distribution(1, 16);
 }

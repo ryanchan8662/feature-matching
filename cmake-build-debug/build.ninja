@@ -106,6 +106,12 @@ build CMakeFiles/feature_matching.dir/writer.cpp.o: CXX_COMPILER__feature_matchi
   OBJECT_DIR = CMakeFiles/feature_matching.dir
   OBJECT_FILE_DIR = CMakeFiles/feature_matching.dir
 
+build CMakeFiles/feature_matching.dir/gaussian_distribution.cpp.o: CXX_COMPILER__feature_matching_Debug /Users/ryanc/Documents/Github/feature-matching/gaussian_distribution.cpp || cmake_object_order_depends_target_feature_matching
+  DEP_FILE = CMakeFiles/feature_matching.dir/gaussian_distribution.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/feature_matching.dir
+  OBJECT_FILE_DIR = CMakeFiles/feature_matching.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target feature_matching
@@ -114,7 +120,7 @@ build CMakeFiles/feature_matching.dir/writer.cpp.o: CXX_COMPILER__feature_matchi
 #############################################
 # Link the executable feature_matching
 
-build feature_matching: CXX_EXECUTABLE_LINKER__feature_matching_Debug CMakeFiles/feature_matching.dir/main.cpp.o CMakeFiles/feature_matching.dir/copy.cpp.o CMakeFiles/feature_matching.dir/draw_point.cpp.o CMakeFiles/feature_matching.dir/fast.cpp.o CMakeFiles/feature_matching.dir/gaussian.cpp.o CMakeFiles/feature_matching.dir/get_array.cpp.o CMakeFiles/feature_matching.dir/reader.cpp.o CMakeFiles/feature_matching.dir/sobel.cpp.o CMakeFiles/feature_matching.dir/Source.cpp.o CMakeFiles/feature_matching.dir/writer.cpp.o
+build feature_matching: CXX_EXECUTABLE_LINKER__feature_matching_Debug CMakeFiles/feature_matching.dir/main.cpp.o CMakeFiles/feature_matching.dir/copy.cpp.o CMakeFiles/feature_matching.dir/draw_point.cpp.o CMakeFiles/feature_matching.dir/fast.cpp.o CMakeFiles/feature_matching.dir/gaussian.cpp.o CMakeFiles/feature_matching.dir/get_array.cpp.o CMakeFiles/feature_matching.dir/reader.cpp.o CMakeFiles/feature_matching.dir/sobel.cpp.o CMakeFiles/feature_matching.dir/Source.cpp.o CMakeFiles/feature_matching.dir/writer.cpp.o CMakeFiles/feature_matching.dir/gaussian_distribution.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
   OBJECT_DIR = CMakeFiles/feature_matching.dir
   POST_BUILD = :

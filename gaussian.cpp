@@ -4,6 +4,7 @@
 
 using namespace Filters;
 
+
 uint8_t Filters::gaussian (struct HeadlessBitmap* _Data, float _Sigma) {
 
 	// generate convolutional kernel ~~~~~~~~~~~~~~~~~~~~~~~~
