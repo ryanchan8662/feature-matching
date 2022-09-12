@@ -6,7 +6,7 @@
 uint8_t write_bmp (struct HeadlessBitmap* _Data) {
     
     FILE* file_pointer;
-    file_pointer = fopen("./test-images/output.bmp", "wb");
+    file_pointer = fopen("../test-images/output.bmp", "wb");
     if (file_pointer == nullptr) return (1);
     
     uint16_t buffer_16 = 0x4D42; // fill with "BM" identifier
