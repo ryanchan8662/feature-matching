@@ -1,4 +1,5 @@
 #include "reader.h"
+#include <unistd.h>
 
 // reads BMP files ONLY!
 
@@ -20,9 +21,8 @@ uint32_t decode_int(uint8_t* buffer, uint32_t start_point) {
 
 struct HeadlessBitmap* read_file() {
 
-    errno_t err;
     FILE* file_pointer;
-    err = fopen_s(&file_pointer, "./test-images/test0.bmp", "rb");
+    file_pointer = fopen("./test-images/test0.bmp", "rb");
     if (file_pointer == nullptr) return (nullptr);
     
 
